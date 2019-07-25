@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block contents %}
+<br>
+<div class="container" style="padding-top:100px;">
+    <div class="card" >
+        <div class="card-body">
+        <h5 class="card-title">{{details.title}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{details.author}} - {{details.pub_date}}</h6>
+        <p class="card-text">{{details.body}}</p>
+        <p class="card-text">{{details.like}}</p>
+        <li>
+            <form action="{% url 'post_like' details.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" value="Like">좋아요</button>
+            </form>
+
+            <p>좋아요 {{ details.like_count }}개</p>
+            {% for like_user in details.like_user_set.all %}
+                <p>{{ like_user.username }}</p>
+            {% endfor %}
+        </li>
+        {% if details.author == user %} 
+        <a href="{% url 'delete' details.id%}" class="card-link"> 삭제하기 </a>
+        <a href="{% url 'update' details.id%}" class="card-link"> 수정하기 </a>
+        {% endif %}
+        </div>
+    </div>
+</div>
+    <br>
+    <div class="container">
+        <br>
+        <button type="button" class="btn btn-dark"><a href="{% url 'home' %}"  style="color:white;" > 홈으로 가기 </a></button>
+    </div>
+
+{%endblock%}

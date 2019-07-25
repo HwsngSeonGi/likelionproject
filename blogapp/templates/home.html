@@ -1,0 +1,40 @@
+{% extends 'base.html'%}
+
+{% block contents %}
+<body>
+<div>
+    <div class="jumbotron" style="padding-top:100px">
+        <h1 class="display-4">
+            <div class="container">
+                 <h1 style="font-weight:600; color:darkslategrey"> {{current_user}} </h1>
+            </div>
+        </h1>
+        <div class="container">  
+            <p class="lead">안녕하세요. 자유롭게 글을 써주세요. </p>
+        </div>
+        <div class="container">
+            <hr class="my-4">
+            <p>문의 사항이 있으면 자유롭게 문의 해 주세요.</p>
+            
+            {% if error %}
+            <p style="color:red;">{{error}}</p>
+            {%endif%}
+            <button type="button" class="btn btn-dark"><a href="{% url 'new' %}"  style="color:white;" > New Post </a></button>
+        </div>
+    </div>
+</div>
+
+{% for blog in blogs.all %}
+    <div class="container">
+        <div class="card" style="padding:7px" >
+            <div class="card-body">
+            <a href="{% url 'detail' blog.id %}"> <h5 class="card-title">{{blog.title}}</h5></a>
+            <h6 class="card-subtitle mb-2 text-muted">{{blog.author}}  -  {{blog.pub_date}}</h6>
+            <p class="card-text">{{blog.body}}</p>
+            </div>
+        </div>
+    </div>
+<br>
+{% endfor %}
+</body>
+{% endblock %}
