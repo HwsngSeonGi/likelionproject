@@ -27,7 +27,7 @@ oauthlib==3.0.1
 pandas==0.24.2
 Pillow==6.0.0
 psycopg2-binary==2.8.3
-Pygments==2.4.0
+Pygments==2.7.4
 pyknon==1.2
 pylint==2.3.1
 PySynth==2.3
